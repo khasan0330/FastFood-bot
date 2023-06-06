@@ -2,8 +2,8 @@ FROM python:3.11
 
 
 WORKDIR /app
-RUN mkdir -p /app/management/media/
-COPY bot .
+RUN mkdir -p /app/management/media/ && mkdir -p /app/bot/
+COPY bot bot/
 COPY requirements.txt .
 
 
