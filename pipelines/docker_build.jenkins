@@ -42,7 +42,7 @@ pipeline {
             steps {
                echo "------------------( push django image to hub.docker)-------------------"
                 sh """
-                docker push khdev/bot_admin:latest:latest
+                docker push khdev/bot_admin:latest
                 """
             }
             steps {
