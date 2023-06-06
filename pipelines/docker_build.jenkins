@@ -18,7 +18,13 @@ pipeline {
                 }
             }
 
+        stage('Start container') {
+            steps {
+                echo "------------------( docker-compose )-------------------"
 
+            }
+
+        }
 
 
 
