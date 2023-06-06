@@ -23,10 +23,13 @@ pipeline {
             steps {
                 echo "------------------( docker-compose )-------------------"
                 sh """
+                ssh root@server
                 docker compose -f docker/docker-compose.yml up -d
                 """
             }
         }
+
+
 
 
 
