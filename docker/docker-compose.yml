@@ -7,8 +7,3 @@ services:
         env_file: /var/fastfood/.env
         container_name: pgdb
 
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-           - 8088:8080
