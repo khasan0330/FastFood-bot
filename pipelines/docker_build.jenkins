@@ -29,6 +29,17 @@ pipeline {
         }
 
 
+        stage('telegram bot') {
+            steps {
+                echo "------------------( building fastfood_bot )-------------------"
+                dir('./') {
+                    sh 'docker build -t khdev/fastfood_bot:latest -f docker/bot/Dockerfile .'
+                }
+            }
+        }
+
+
+
 
 
 
