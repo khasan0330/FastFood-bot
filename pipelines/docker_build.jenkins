@@ -23,8 +23,8 @@ pipeline {
             steps {
                 echo "------------------( docker-compose )-------------------"
                 sh """
-                ssh root@server
-                docker compose -f docker/docker-compose.yml up -d
+                ssh root@server 'curl https://github.com/khasan0330/FastFood-bot/blob/main/docker/docker-compose.yml'
+                ssh root@server 'docker compose docker-compose.yml up -d'
                 """
             }
         }
