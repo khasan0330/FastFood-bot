@@ -38,11 +38,19 @@ pipeline {
             }
         }
 
-
-
-
-
-
-
+        stage("docker push") {
+            steps {
+               echo "------------------( push django image to hub.docker)-------------------"
+                sh """
+                docker push khdev/bot_admin:latest:latest
+                """
+            }
+            steps {
+               echo "------------------( push bot image to hub.docker)-------------------"
+                sh """
+                docker push khdev/fastfood_bot:latest
+                """
+            }
+        }
     }
 }
