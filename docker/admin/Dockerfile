@@ -1,7 +1,7 @@
 FROM python:3.11
 
 WORKDIR /web
-RUN mkdir /web/media
+RUN mkdir /web/media && mkdir /web/static
 COPY management .
 COPY requirements.txt .
 
