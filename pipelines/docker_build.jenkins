@@ -17,13 +17,15 @@ pipeline {
                     """
                 }
             }
+        }
 
         stage('Start container') {
             steps {
                 echo "------------------( docker-compose )-------------------"
-
+                sh """
+                docker compose up -d -f docker/docker-compose.yml
+                """
             }
-
         }
 
 
