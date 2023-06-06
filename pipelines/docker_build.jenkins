@@ -45,12 +45,7 @@ pipeline {
                 docker push khdev/bot_admin:latest
                 """
             }
-            steps {
-               echo "------------------( push bot image to hub.docker)-------------------"
-                sh """
-                docker push khdev/fastfood_bot:latest
-                """
-            }
+
         }
     }
 }
