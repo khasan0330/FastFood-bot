@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage("docker push") {
+        stage("docker push to hub") {
             steps {
                echo "------------------( push django image to hub.docker)-------------------"
                 sh """
