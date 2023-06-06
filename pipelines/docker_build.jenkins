@@ -19,13 +19,12 @@ pipeline {
             }
         }
 
-        stage('Start container') {
+        stage('django admin') {
             steps {
-                echo "------------------( docker-compose )-------------------"
-                sh """
-                ssh root@server 'curl https://github.com/khasan0330/FastFood-bot/blob/main/docker/docker-compose.yml'
-                ssh root@server 'docker compose docker-compose.yml up -d'
-                """
+                echo "------------------( building django admin )-------------------"
+                dir('./') {
+                    sh 'docker build -t khdev/bot_admin:latest -f docker/admin/Dockerfile .'
+                }
             }
         }
 
