@@ -2,7 +2,7 @@ FROM python:3.11
 
 
 WORKDIR /app
-RUN mkdir /app/management/media/
+RUN mkdir -p /app/management/media/
 COPY bot .
 COPY requirements.txt .
 
