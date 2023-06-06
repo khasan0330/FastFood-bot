@@ -1,9 +1,0 @@
-version: '3'
-
-services:
-
-    pgdb:
-        image: postgres
-        env_file: /var/fastfood/.env
-        container_name: pgdb
-
