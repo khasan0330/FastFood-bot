@@ -12,6 +12,7 @@ SECRET_KEY = os.getenv('SECRET')
 DEBUG = bool(int(os.getenv('DEBUG')))
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [os.getenv('BOT_URL')]
 
 
 INSTALLED_APPS = [
