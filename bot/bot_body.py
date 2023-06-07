@@ -128,15 +128,16 @@ async def show_choose_product(call: CallbackQuery):
     product_id = int(call.data.split('_')[-1])
     product_id, name, price, info, image, _ = db_get_product(product_id)
 
-    text = f"{name}\n"
-    text += f"Ингредиенты: {info}\n"
-    text += f"Цена: {price} сум"
+    text = f"<b>{name}</b>\n"
+    text += f"\n<b>Ингредиенты:</b> {info}\n"
+    text += f"<b>Цена:</b> {price} сум"
 
     try:
         user_cart_id = db_get_user_cart(chat_id)[0]
         db_update_to_cart(price=price, quantity=1, cart_id=user_cart_id)
         await bot.send_message(
             chat_id=chat_id,
+            parse_mode='HTML',
             text='Выберите модификатор',
             reply_markup=back_to_menu()
         )
@@ -324,6 +325,21 @@ async def create_order(call: CallbackQuery):
 
     # TODO Отчет манагерам
     clear_finally_cart(cart_id)
+
+
+@dp.message_handler(regexp=r'🛒 Корзинка')
+async def cart_from_main_menu(message: Message):
+    await message.answer("Режим Разработки, учебный бот")
+
+
+@dp.message_handler(regexp=r'📒 История')
+async def history_from_main_menu(message: Message):
+    await message.answer("Режим Разработки,  учебный бот")
+
+
+@dp.message_handler(regexp=r'⚙ Настройки')
+async def setting_from_main_menu(message: Message):
+    await message.answer("Режим Разработки, учебный бот ")
 
 
 executor.start_polling(dp)

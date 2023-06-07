@@ -50,6 +50,9 @@ services:
             - /var/fastfood/media:/app/management/media
 
 
+# mkdir /var/fastfood/media
+# mkdir /var/fastfood/static
+
 # При первом старте:
 # docker compose run django python manage.py migrate
 # docker compose run django python manage.py createsuperuser
