@@ -9,7 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET')
-DEBUG = False
+DEBUG = bool(int(os.getenv('DEBUG')))
 
 ALLOWED_HOSTS = ['*']
 
@@ -93,6 +93,10 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'web_admin/static'
+]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
