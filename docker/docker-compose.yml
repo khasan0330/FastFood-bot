@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+    django:
+        image: khdev/bot_admin
+        command: sh -c "gunicorn --bind 0.0.0.0:8000  --workers 3 management.wsgi"
+        env_file:
+            - .env
+        container_name: fastfood_admin
+        restart: always
+        volumes:
+            - /var/fastfood/media:/web/media
+            - /var/fastfood/static:/web/static
+        expose:
+            - 8000
+        depends_on:
+            - pgdb
+
+
+    pgdb:
+        image: postgres
+        env_file:
+            - .env
+        container_name: fastfood_db
+        restart: always
+        volumes:
+            - /var/fastfood/db:/var/lib/postgresql/data/
+
+    nginx:
+        image: nginx
+        container_name: fastfood_nginx
+        depends_on:
+            - django
+        ports:
+            - "80:80"
+        restart: always
+        volumes:
+            - /var/fastfood/static:/var/www/html/static
+            - ./nginx-conf.d:/etc/nginx/conf.d
+
+    bot:
+        image: khdev/fastfood_bot
+        env_file:
+            - .env
+        container_name: fastfood_bot
+        depends_on:
+            - pgdb
+        restart: always
+        volumes:
+            - /var/fastfood/media:/app/management/media
+
+
+# При первом старте:
+# docker compose run django python manage.py migrate
+# docker compose run django python manage.py createsuperuser
+# docker compose run django python manage.py collectstatic
+
+# Для старта:
+# docker compose up -d
+
+# Для остановки:
+# docker compose stop

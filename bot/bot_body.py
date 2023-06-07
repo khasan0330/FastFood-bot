@@ -140,7 +140,7 @@ async def show_choose_product(call: CallbackQuery):
             text='Выберите модификатор',
             reply_markup=back_to_menu()
         )
-        with open(f'../management/media/{image}', mode='rb') as img:
+        with open(f'{IMAGE_PATH}{image}', mode='rb') as img:
             await bot.send_photo(
                 chat_id=chat_id,
                 photo=img,
@@ -205,7 +205,7 @@ async def constructor_changes(call: CallbackQuery):
     text += f"Цена: {product_price} сум"
 
     try:
-        with open(f'../management/media/{product_image}', mode='rb') as img:
+        with open(f'{IMAGE_PATH}{product_image}', mode='rb') as img:
             await bot.edit_message_media(
                 chat_id=chat_id,
                 message_id=message_id,
