@@ -227,12 +227,12 @@ async def put_into_cart(call: CallbackQuery):
     if db_ins_or_upd_finally_cart(cart_id, product_name, total_products, total_price):
         await bot.send_message(
             chat_id=chat_id,
-            text="Продукт успешно добавлен"
+            text="Продукт успешно добавлен ✅"
         )
     else:
         await bot.send_message(
             chat_id=chat_id,
-            text="Количество успешно изменено"
+            text="Количество успешно изменено ✏"
         )
 
     await bot.delete_message(

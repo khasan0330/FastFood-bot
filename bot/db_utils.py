@@ -8,11 +8,11 @@ load_dotenv()
 
 def db_connect():
     database = psycopg2.connect(
-        dbname=os.getenv('DB_NAME'),
-        host=os.getenv('DB_HOST'),
-        user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'),
-        port=os.getenv('DB_PORT')
+        dbname=os.getenv('POSTGRES_DB'),
+        host=os.getenv('POSTGRES_ADDR'),
+        user=os.getenv('POSTGRES_USER'),
+        password=os.getenv('POSTGRES_PASSWORD'),
+        port=os.getenv('POSTGRES_PORT')
     )
     return database
 
@@ -143,9 +143,12 @@ def db_ins_or_upd_finally_cart(
         ''', (cart_id, product_name, total_products, total_price))
         return True
     except IntegrityError:
+        database.close()
+        database = db_connect()
+        cursor = database.cursor()
         cursor.execute('''
         UPDATE web_admin_finally_carts SET product_quantity = %s,  final_price = %s
-        WHERE product_name = ? AND cart_id = %s
+        WHERE product_name = %s AND cart_id = %s
         ''', (total_products, total_price, product_name, cart_id))
         return False
     finally:
